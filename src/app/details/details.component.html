@@ -1,0 +1,133 @@
+<!--Static Implementation-->
+<div>
+  <br>
+    <div class="container">
+        <div class="container">
+          <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row"  fxLayoutAlign="space-around center" class="content">
+              <div class="blocks">
+                  <button button="submit" mat-raised-button color="primary" (click)="openRegistration()">
+                      <mat-icon>add</mat-icon> Register
+                  </button>
+              </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card" >
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Employees</h3>
+          </mat-card-title>
+          <mat-card-content>
+              <div class="example-container mat-elevation-z8">
+                  <mat-table #table [dataSource]="data[0]">
+
+                  <!-- fname -->
+                    <ng-container matColumnDef="fname">
+                      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.fname}} </mat-cell>
+                    </ng-container>
+
+                    <!-- lname -->
+                    <ng-container matColumnDef="lname">
+                      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.lname}} </mat-cell>
+                    </ng-container>
+
+                    <!-- phoneNo -->
+                    <ng-container matColumnDef="phoneNo">
+                      <mat-header-cell *matHeaderCellDef> Phone No </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.phoneNo}} </mat-cell>
+                    </ng-container>
+
+                    <!-- email -->
+                    <ng-container matColumnDef="email">
+                      <mat-header-cell *matHeaderCellDef> email </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+                    </ng-container>
+
+                    <!-- city -->
+                    <ng-container matColumnDef="city">
+                      <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+                    </ng-container>
+                    
+                    <!-- Job -->
+                    <ng-container matColumnDef="job">
+                      <mat-header-cell *matHeaderCellDef> Job </mat-header-cell>
+                      <mat-cell *matCellDef="let element"> {{element.job}} </mat-cell>
+                    </ng-container>
+
+
+                    <!-- delete -->
+                    <ng-container matColumnDef="delete">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                        <a (click)="deleteRecord(element.id)" type="button">
+                          <mat-icon class="icon">delete</mat-icon>
+                        </a>
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- edit -->
+                    <ng-container matColumnDef="edit">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                        <a (click)="openEdit(element)" type="button">
+                          <mat-icon class="icon">edit</mat-icon>
+                        </a>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+                </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Dynamic Implementation-->
+<!-- <div>
+  <br>
+  <div class="container">
+    <div class="container">
+      <div fxLayout="column" fxLayoutGap="20px" fxLayout.gt-md="row" fxLayoutAlign="space-around center"
+        class="content">
+        <div class="blocks">
+          <button button="submit" mat-raised-button color="primary">
+            <mat-icon>add</mat-icon> Register
+          </button>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="container">
+      <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <mat-card class="card">
+          <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column">
+            <h3>Recent Posts</h3>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="matcontainer mat-elevation-z8">
+
+              <mat-table [dataSource]="data[0]" class="mat-elevation-z8">
+                <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+                  <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+              </mat-table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div> -->

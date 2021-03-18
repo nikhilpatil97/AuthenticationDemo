@@ -1,0 +1,12 @@
+.matform {
+    display: flex;
+    flex-direction: column;
+}
+
+.matform > * {
+    width: 100%;
+}
+
+.close{
+    width: 100%;
+}

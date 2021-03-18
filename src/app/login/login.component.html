@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-content>
+    <form class="matform" (ngSubmit)="onSubmit(employeeForm)" #employeeForm="ngForm">
+      <h2>Log In</h2>
+      <mat-error *ngIf="loginInvalid">
+        The username or password not match
+      </mat-error>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" id="email" [(ngModel)]="employee.email" name="email"
+          #email=ngModel required>
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [type]="hide ? 'password' : 'text'" id="password" placeholder="Password" required
+          [(ngModel)]="employee.password" name="password" #password=ngModel>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="primary">Login</button>&nbsp;
+      <button mat-raised-button type="button" color="primary" (click)="openRegistration()">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

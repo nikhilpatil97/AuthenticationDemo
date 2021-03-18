@@ -1,0 +1,118 @@
+<!-- <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light navigation">
+    <a class="navbar-brand" href="#">
+      <img src="./../../../assets/images/logo.png" alt="" width="40" height="40">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active"> Home</a>
+        <a class="nav-item nav-link" routerLink="/details" routerLinkActive="active">Details</a>
+      </div>
+    </div>
+  </nav>
+</div> -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+    <mat-nav-list>
+      <a mat-list-item (click)="sidenav.toggle()" style="margin-bottom: 2px;"
+        *ngIf="loginAuthenticate() else sideNavHeader" (click)="viewProfile(currentRecord)">
+        <img class="sidenav-profile-icon" src="../../../assets/images/male.jpg" alt="Avatar">
+        <span class="lable">{{currentRecord.fname}} {{currentRecord.lname}}</span>
+
+      </a>
+      <ng-template #sideNavHeader> 
+        <a mat-list-item (click)="sidenav.toggle()">
+        <img class="sidenav-profile-icon" src="../../../assets/images/male.jpg" alt="Avatar">
+        <span class="lable">Profile</span>
+      </a>
+      </ng-template>
+      <a mat-list-item (click)="sidenav.toggle()" *ngIf="!loginAuthenticate()">
+        <mat-icon class="icon">input</mat-icon>
+        <span class="label">Login</span>
+      </a>
+
+      <!-- <a mat-list-item routerLink="/registration">
+      <mat-icon class="icon">home</mat-icon>
+        <span class="label">Home</span>
+    </a> -->
+      <a mat-list-item routerLink="/details" (click)="sidenav.toggle()">
+        <mat-icon class="icon">dashboard</mat-icon>
+        <span class="label">Dashboard</span>
+      </a>
+
+      <a mat-list-item type="button" *ngIf="loginAuthenticate()" (click)="logout()" (click)="sidenav.toggle()">
+        <mat-icon class="icon">input</mat-icon>
+        <span class="label">LogOut</span>
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div fxHide.gt-xs>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="currentRecord else navHeader">
+        <button mat-button [matMenuTriggerFor]="profile" aria-label="icon-button with a menu">
+          <img class="profile-icon" src="../../../assets/images/male.jpg" alt="Avatar">
+        </button>
+        <mat-menu #profile="matMenu">
+          <button mat-menu-item (click)="viewProfile(currentRecord)">
+            {{currentRecord.fname}} {{currentRecord.lname}}
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>input</mat-icon>
+            <span>LogOut</span>
+          </button>
+        </mat-menu>
+
+      </div>
+      <ng-template #navHeader>
+        <button mat-button aria-label="icon-button with a menu">
+          <img class="profile-icon" src="../../../assets/images/male.jpg" alt="Avatar">
+        </button>
+      </ng-template>
+
+
+      <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+          <!-- <li>
+                <a *ngIf="!loginAuthenticate()">
+                  <mat-icon class="icon">input</mat-icon>
+                  <span  class="label">Login</span>
+                 </a>
+            </li> -->
+
+          <!-- <li>
+              <a routerLink="/registration">
+                  <mat-icon class="icon">home</mat-icon>
+                  <span class="label">Home</span>
+              </a>
+            </li> -->
+          <li>
+            <a routerLink="/details">
+              <mat-icon class="icon">dashboard</mat-icon>
+              <span class="label">Dashboard</span>
+            </a>
+          </li>
+
+          <!-- <li>
+            <a (click)="logout()" *ngIf="loginAuthenticate()">
+              <mat-icon class="icon">input</mat-icon>
+              <span class="label">LogOut</span>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+    </mat-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>{{data}}</h1>
+<div mat-dialog-content>
+  <form class="matform" (ngSubmit)="onSubmit(employeeForm)" #employeeForm="ngForm">
+
+    <!-- Material field for First Name -->
+    <mat-form-field>
+      <input matInput placeholder="First Name" id="firstName" type="text" required [(ngModel)]="employee.fname"
+        name="firstname" #firstName=ngModel>
+    </mat-form-field>
+
+    <!-- Material field for Last Name -->
+    <mat-form-field>
+      <input matInput placeholder="Last Name " id="lastName" type="text" required [(ngModel)]="employee.lname"
+        name="lname" #lastName=ngModel>
+    </mat-form-field>
+
+    <!-- Material field for Email -->
+    <mat-form-field>
+      <input matInput placeholder="Email" type="email" id="email" required [(ngModel)]="employee.email" name="email"
+        #email=ngModel pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$">
+      <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+        <mat-error *ngIf="email.errors.pattern">Invalid Mail</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Material field for Password -->
+    <mat-form-field>
+      <input matInput placeholder="password" id="password" type="password" required minlength="4" [(ngModel)]="employee.password"
+        name="password" #password=ngModel>
+        <mat-error *ngIf="password.invalid && (password.dirty || password.touched)">
+          <mat-error *ngIf="password.errors.minlength">Minimum 4 charactors</mat-error>
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Material field for Phone Number -->
+    <mat-form-field>
+      <input matInput placeholder="Phone No" type="tel" id="phoneNumber" required [(ngModel)]="employee.phoneNo"
+        name="phone" #phoneNumber=ngModel minlength="10" maxlength="10" pattern="^[0-9]*$">
+      <mat-error *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)">
+        <mat-error *ngIf="phoneNumber.errors.minlength">Minimum 10 numbers</mat-error>
+        <mat-error *ngIf="phoneNumber.errors.pattern">Only Numbers allowed</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Material field for City -->
+    <mat-form-field>
+      <input matInput placeholder="city" type="text" id="city" [(ngModel)]="employee.city" name="city">
+    </mat-form-field>
+
+    <!-- Material field for job -->
+    <mat-form-field>
+      <mat-select matInput placeholder="Proffession" id="job" required [(ngModel)]="employee.job" name="job">
+        <mat-option *ngFor="let cat of jobs" [value]="cat">
+          {{ cat }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" [disabled]="!employeeForm.form.valid" color="primary" (click)="openSnackBar('Record Inserted','Done')">Save</button><br>
+    <button mat-raised-button type="reset" (click)="onNoClick()" color="warn">Cancel</button>
+  </form>
+</div>
